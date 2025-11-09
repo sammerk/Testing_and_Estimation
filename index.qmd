@@ -6,8 +6,10 @@ format:
     title-block-banner: "#267326"
     toc: true
     toc-location: left
-    code-link: true
-    code-links: true
+    code-links:
+      - text: Link zum Code
+        icon: file-code
+        href: index.qmd
 author: 
   - name: Samuel Merk
     orcid: 0000-0003-2594-5337
