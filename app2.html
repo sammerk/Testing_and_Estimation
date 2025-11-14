@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayesian Prior and Posterior</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container-fluid {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .card {
+            background-color: #f2f2f2;
+            margin-bottom: 0;
+        }
+        
+        .card-body {
+            background-color: #f2f2f2;
+        }
+        
+        .row {
+            margin: 0;
+        }
+        
+        .row.spacing {
+            margin-top: 15px !important;
+        }
+        
+        .card-header.bg-primary {
+            background-color: #267326 !important;
+            color: white !important;
+        }
+        
+        input[type="range"] {
+            accent-color: #267326;
+        }
+        
+        /* Firefox */
+        input[type="range"]::-moz-range-thumb {
+            background-color: #267326;
+        }
+        
+        /* Chrome, Safari, Opera */
+        input[type="range"]::-webkit-slider-thumb {
+            background-color: #267326;
+        }
+        
+        input[type="number"] {
+            border-color: #267326;
+        }
+        
+        input[type="number"]:focus {
+            border-color: #267326;
+            box-shadow: 0 0 0 0.25rem rgba(38, 115, 38, 0.25);
+        }
+        
+        .slider-container {
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .slider-ticks {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 8px;
+            margin-top: 5px;
+        }
+        
+        .slider-tick {
+            font-size: 0.85em;
+            color: #666;
+        }
+        
+        .slider-value-display {
+            font-weight: bold;
+            margin-left: 10px;
+            color: #267326;
+        }
+        
+        .equal-height-row {
+            display: flex;
+        }
+        
+        .equal-height-row .card {
+            height: 100%;
+        }
+        
+        #plotCanvas {
+            max-width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row equal-height-row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary">Prior</div>
+                    <div class="card-body">
+                        <div class="slider-container">
+                            <label for="prior_mu">Prior Mean <span id="priorMuValue" class="slider-value-display">0.50</span></label>
+                            <input type="range" id="prior_mu" min="0" max="1" step="0.01" value="0.5" class="form-range">
+                            <div class="slider-ticks">
+                                <span class="slider-tick">0.0</span>
+                                <span class="slider-tick">0.25</span>
+                                <span class="slider-tick">0.5</span>
+                                <span class="slider-tick">0.75</span>
+                                <span class="slider-tick">1.0</span>
+                            </div>
+                        </div>
+
+                        <div class="slider-container">
+                            <label for="prior_phi">Prior Precision <span id="priorPhiValue" class="slider-value-display">3</span></label>
+                            <input type="range" id="prior_phi" min="2" max="100" step="1" value="3" class="form-range">
+                            <div class="slider-ticks">
+                                <span class="slider-tick">2</span>
+                                <span class="slider-tick">25</span>
+                                <span class="slider-tick">50</span>
+                                <span class="slider-tick">75</span>
+                                <span class="slider-tick">100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary">Data</div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="successes" class="form-label">n₁ = Zustimmung G9</label>
+                            <input type="number" class="form-control" id="successes" min="0" step="1" value="13">
+                        </div>
+                        <div class="mb-3">
+                            <label for="failures" class="form-label">n₂ = Ablehnung G9</label>
+                            <input type="number" class="form-control" id="failures" min="0" step="1" value="8">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row spacing">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary">Posterior</div>
+                    <div class="card-body">
+                        <canvas id="plotCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Beta distribution PDF
+        function betaPDF(x, alpha, beta) {
+            if (x <= 0 || x >= 1) return 0;
+            
+            // Compute beta function using gamma function approximation
+            function gammaLn(z) {
+                // Stirling's approximation for ln(gamma(z))
+                return (z - 0.5) * Math.log(z) - z + 0.5 * Math.log(2 * Math.PI) +
+                       1 / (12 * z) - 1 / (360 * z * z * z);
+            }
+            
+            const lnBeta = gammaLn(alpha) + gammaLn(beta) - gammaLn(alpha + beta);
+            const logPdf = (alpha - 1) * Math.log(x) + (beta - 1) * Math.log(1 - x) - lnBeta;
+            
+            return Math.exp(logPdf);
+        }
+        
+        // Convert mu, phi parameterization to alpha, beta
+        function muPhiToShapes(mu, phi) {
+            return {
+                shape1: mu * phi,
+                shape2: (1 - mu) * phi
+            };
+        }
+        
+        // Compute quantile of beta distribution (approximation using binary search)
+        function betaQuantile(p, alpha, beta, tolerance = 1e-6) {
+            let low = 0;
+            let high = 1;
+            let mid;
+            
+            for (let i = 0; i < 100; i++) {
+                mid = (low + high) / 2;
+                
+                // Numerical integration to get CDF
+                let cdf = 0;
+                const steps = 1000;
+                const dx = mid / steps;
+                for (let j = 1; j <= steps; j++) {
+                    const x = j * dx;
+                    cdf += betaPDF(x, alpha, beta) * dx;
+                }
+                
+                if (Math.abs(cdf - p) < tolerance) {
+                    return mid;
+                }
+                
+                if (cdf < p) {
+                    low = mid;
+                } else {
+                    high = mid;
+                }
+            }
+            
+            return mid;
+        }
+        
+        // Get input values
+        function getInputs() {
+            return {
+                priorMu: parseFloat(document.getElementById('prior_mu').value),
+                priorPhi: parseFloat(document.getElementById('prior_phi').value),
+                successes: parseInt(document.getElementById('successes').value) || 0,
+                failures: parseInt(document.getElementById('failures').value) || 0
+            };
+        }
+        
+        let chart = null;
+        
+        function updatePlot() {
+            const inputs = getInputs();
+            const priorShapes = muPhiToShapes(inputs.priorMu, inputs.priorPhi);
+            
+            // Posterior parameters
+            const posteriorAlpha = priorShapes.shape1 + inputs.successes;
+            const posteriorBeta = priorShapes.shape2 + inputs.failures;
+            
+            // Generate data points
+            const numPoints = 1000;
+            const p = [];
+            const priorDensity = [];
+            const posteriorDensity = [];
+            
+            for (let i = 0; i <= numPoints; i++) {
+                const x = i / numPoints;
+                p.push(x);
+                priorDensity.push(betaPDF(x, priorShapes.shape1, priorShapes.shape2));
+                posteriorDensity.push(betaPDF(x, posteriorAlpha, posteriorBeta));
+            }
+            
+            // Find maximum density for scaling
+            const densityMax = Math.max(...priorDensity, ...posteriorDensity);
+            
+            // Compute 96% HPDI (using quantiles as approximation)
+            const hpdiLb = betaQuantile(0.02, posteriorAlpha, posteriorBeta);
+            const hpdiUb = betaQuantile(0.98, posteriorAlpha, posteriorBeta);
+            
+            const ctx = document.getElementById('plotCanvas').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: p,
+                    datasets: [
+                        {
+                            label: 'Prior',
+                            data: priorDensity,
+                            borderColor: '#d77d00',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            pointHitRadius: 0,
+                            tension: 0.4,
+                            order: 2
+                        },
+                        {
+                            label: 'Posterior',
+                            data: posteriorDensity,
+                            borderColor: '#267326',
+                            backgroundColor: 'transparent',
+                            borderWidth: 2,
+                            pointRadius: 0,
+                            pointHitRadius: 0,
+                            tension: 0.4,
+                            order: 1
+                        },
+                        {
+                            label: '96% HDI',
+                            data: p.map(x => (x >= hpdiLb && x <= hpdiUb) ? densityMax / 40 : null),
+                            borderColor: 'transparent',
+                            backgroundColor: 'rgba(38, 115, 38, 0.3)',
+                            borderWidth: 0,
+                            pointRadius: 0,
+                            pointHitRadius: 0,
+                            fill: true,
+                            order: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 0
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            align: 'end',
+                            labels: {
+                                usePointStyle: true,
+                                pointStyle: 'line',
+                                generateLabels: function(chart) {
+                                    const datasets = chart.data.datasets;
+                                    return datasets.map((dataset, i) => {
+                                        const isHDI = dataset.label === '96% HDI';
+                                        return {
+                                            text: dataset.label,
+                                            fillStyle: isHDI ? dataset.backgroundColor : 'transparent',
+                                            strokeStyle: isHDI ? dataset.backgroundColor : dataset.borderColor,
+                                            lineWidth: isHDI ? 8 : 2,
+                                            hidden: false,
+                                            index: i,
+                                            pointStyle: isHDI ? 'rect' : 'line'
+                                        };
+                                    });
+                                }
+                            }
+                        },
+                        tooltip: {
+                            enabled: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: {
+                                display: true,
+                                text: 'Anteil G9-Befürworter:innen'
+                            },
+                            min: 0,
+                            max: 1,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toFixed(1);
+                                },
+                                stepSize: 0.2
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Wahrscheinlichkeitsdichte'
+                            },
+                            min: 0,
+                            max: densityMax * 1.1
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Update slider value displays
+        document.getElementById('prior_mu').addEventListener('input', function(e) {
+            document.getElementById('priorMuValue').textContent = parseFloat(e.target.value).toFixed(2);
+            updatePlot();
+        });
+        
+        document.getElementById('prior_phi').addEventListener('input', function(e) {
+            document.getElementById('priorPhiValue').textContent = parseInt(e.target.value);
+            updatePlot();
+        });
+        
+        document.getElementById('successes').addEventListener('input', updatePlot);
+        document.getElementById('failures').addEventListener('input', updatePlot);
+        
+        updatePlot();
+    </script>
+</body>
+</html>

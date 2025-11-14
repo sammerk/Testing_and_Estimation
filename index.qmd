@@ -6,6 +6,11 @@ format:
     title-block-banner: "#267326"
     toc: true
     toc-location: left
+    callout-icon: false
+    other-links:
+      - text: GitHub Repository
+        icon: github
+        href: https://data.nasa.gov/
     code-links:
       - text: Link zum Code
         icon: file-code
@@ -18,9 +23,15 @@ date: today
 lang: de
 csl: apa.csl
 bibliography: references.bib
-filters:
-  - shinylive
+
   
+custom-callout:
+  customcallout:
+    color: "#267326"
+
+filters:
+- custom-callout  
+- shinylive
   
 brand:
   color: 
@@ -72,43 +83,61 @@ Ganz grundlegend kann a priori das Erkenntnisinteresse von Studien in die folgen
 : Erkenntisinteressen nach [@doering2016].
 :::
 
-## Gütekriterien wiss. Erkenntnis nach @campbell1957
 
-Für ein erfolgreiches Studiendesign und die anschließende statistische Analyse ist es sehr wertvoll sich vorab über Schwerpunkte besonders gewünschter Aspekte wissenschaftlicher Güte Gedanken zu machen. Insbesondere über die Unterkriterien **Methodischer Strenge**:
+```{r}
+#| echo: false
+ifeb_names <- c("André", "Carolin", "Christian", "Erika", "Eva", "Fabian", "Florian", "Johanna", "Kirstin", "Kristina", "Liene", "Marina", "Max", "Michael", "Nilani", "Sarah", "Theresa", "Cora", "Martin")
+not_present <- c("André")
+additions <- c("Julian")
+present <- c(ifeb_names[!ifeb_names %in% not_present], additions)
+groups_long <- sample(present, length(present))
+```
 
--   **Konstruktvalidität** (*Inwiefern ist die Interpretation der Messwerte angemessen?*)
--   **Interne Validität** (*Inwiefern sind Assoziationen von unabhängiger \[beeinflussender\] und abhängiger \[beeinflusster\] Variabler als kausale Effekte interpretierbar?*)
--   **Externe Validität** (*Inwiefern können die Schlussfolgerungen der Studie verallgemeinert werden?*)
--   **Statistische Validität** (*Wie robust und angemessen sind die verwendeten statistischen Verfahren?*)
 
-## Deskriptiv- und Inferenzstatistik
+::: {.customcallout collapse="true"}
+## 🧠 Arbeitsauftrag: 
 
-**Deskriptive Statistik** beschreibt vorliegende Daten (z.B. mit Effektstärken), während **Inferenzstatistik** Aussagen über den die Daten generierenden Mechanismus trifft. Beide können »eher einfach« oder »hoch komplex« sein und oftmals stehen sie in einem synergetischen Verhältnis (siehe @fig-jingjang).
+**Klassifiziert mit dem zugelosten Partnerin bzw. dem zugelosten Partner für euch aktuelle/interessante Forschungsfragen als Deskriptiv/Explorativ/Explanativ/Prädiktiv**
 
-::: column-margin
-![Synergetisches Verhältnis von deskriptiver Statistik und Inferenzstatistik](img/yingyang.svg){#fig-jingjang width="300px"}
+Die Gruppen:
+
+:::: {.columns}
+::: {.column width="50%"}
+* `r paste(groups_long[1:2], collapse = " 💝 ")`
+* `r paste(groups_long[3:4], collapse = " 💝 ")`
+* `r paste(groups_long[5:6], collapse = " 💝 ")`
+* `r paste(groups_long[7:8], collapse = " 💝 ")`
+* `r paste(groups_long[9:10], collapse = " 💝 ")`
+* `r paste(groups_long[11:12], collapse = " 💝 ")`
+:::
+::: {.column width="50%"}
+* `r paste(groups_long[13:14], collapse = " 💝 ")`
+* `r paste(groups_long[15:16], collapse = " 💝 ")`
+* `r paste(groups_long[17:18], collapse = " 💝 ")`
+* `r paste(groups_long[19:20], collapse = " 💝 ")`
+* `r paste(groups_long[21:22], collapse = " 💝 ")`
+* `r paste(groups_long[23:24], collapse = " 💝 ")`
+:::
+::::
+
 :::
 
-## Bayesianisches und Frequentistisches Schätzen und Testen
+## Übersicht: Bayesianisches und frequentistisches Schätzen und Testen
 
 Eine sehr heuristische Klassifikation inferenzstatistischer Verfahren stellt die Unterscheidung von statistischer Schätzung und Testung dar:
 
-> (Inferenzstatistische) *Schätzungen* (estimation with quantified uncertainty) treffen anhand von Stichproben Aussagen über Parameter der Grundgesamtheit (Population) aus der die Stichprobe gezogen wurde.[^1]
+> (Inferenzstatistische) *Schätzungen* (estimation with quantified uncertainty) treffen anhand von Stichproben Aussagen über Parameter der Grundgesamtheit (Population) aus der die Stichprobe gezogen wurde.
 
-[^1]: Bspw.: *»Mit 96%iger Wahrscheinlichkeit liegt die Analphabetismusinzidienz von 15-Jährigen in Deutschland zwischen .08 und .12«*
-
-> (Inferenzstatistische) *Hypothesentests* bewerten anhand von Stichprobendaten die Gültigkeit von Hypothesen in der Grundgesamtheit (Population) aus der die Stichprobe gezogen wurde.[^2]
-
-[^2]: Bspw.: *»Nimmt man an, dass sich die Analphabetismusinzidienz von 15-Jährigen in Deutschland zwischen 2021 und 2025 nicht geändert hat, beträgt die Wahrscheinlichkeit der vorliegenden Daten p = .032«*
+> (Inferenzstatistische) *Hypothesentests* bewerten anhand von Stichprobendaten die Gültigkeit von Hypothesen in der Grundgesamtheit (Population) aus der die Stichprobe gezogen wurde.
 
 Diese beiden Verfahren können sowohl im Rahmen der **frequentistischen Statistik** als auch der **bayesianischen Statistik** angewendet werden. Die folgende Tabelle gibt einen Überblick über die wichtigsten Werkzeuge:
 
 |   | Frequentistische Statistik | Bayesianische Statistik |
 |----------------------|--------------------------|------------------------|
 | Parameterschätzung | Konfidenzintervalle | Posterior Distributions |
-| Hypothesentest | p-Werte | Bayes Faktoren & ROPE-CrI Procedure |
+| Hypothesentest | p-Werte & ROPE CI-Procedure | Bayes Faktoren & ROPE-CrI Procedure |
 
-## Hypothesenarten
+### Hypothesenarten & Informationsgehalt
 
 Bayesianische wie frequentistischen Hypothesentests können unterschiedliche Arten von Hypothesen zugrunde gelegt werden:
 
@@ -122,189 +151,142 @@ Dies ist am leichtesten anhand der Nullhypothese nachvollziehbar. Wird etwa die 
 
 Äquivalenzhypothesen können sowohl frequentistisch [z.B. TOAST-Prozedur in R und JASP, @lakens2017] wie bayesianisch [z.B. ROPE-Ansatz @kruschke2015] getestet werden. Für das Testen informativer Hypothesen liegen bayesianische Methoden in (u.a.) JASP und R vor [z.B. `{bain}`, @gu2019] sowie in den frequentistischen R-Pakete `{restriktor}` [@vanbrabant2020] und `{ic.infer}` [@gromping2010].
 
-## Shinylive
+
+```{r}
+#| echo: false
+groups_long <- sample(present, length(present))
+```
+
+
+::: {.customcallout collapse="true"}
+## 🧠 Arbeitsauftrag: 
+
+**Pitched eurer Partnerin bzw. eurem Partner eine Hypothese, die ihr in letzter Zeit getestet habt. Dieser klassifiziert diese dann als Punkthypothese, Äquivalenzhypothese oder informative Hypothese**
+
+Die Gruppen:
+
+:::: {.columns}
+::: {.column width="50%"}
+* `r paste(groups_long[1:2], collapse = " 💝 ")`
+* `r paste(groups_long[3:4], collapse = " 💝 ")`
+* `r paste(groups_long[5:6], collapse = " 💝 ")`
+* `r paste(groups_long[7:8], collapse = " 💝 ")`
+* `r paste(groups_long[9:10], collapse = " 💝 ")`
+* `r paste(groups_long[11:12], collapse = " 💝 ")`
+:::
+::: {.column width="50%"}
+* `r paste(groups_long[13:14], collapse = " 💝 ")`
+* `r paste(groups_long[15:16], collapse = " 💝 ")`
+* `r paste(groups_long[17:18], collapse = " 💝 ")`
+* `r paste(groups_long[19:20], collapse = " 💝 ")`
+* `r paste(groups_long[21:22], collapse = " 💝 ")`
+* `r paste(groups_long[23:24], collapse = " 💝 ")`
+:::
+::::
+:::
+
+## Frequentistisches Testen
+
+### Was sind *p*-Werte?
+In den Sozialwissenschaften sind *p*-Werte das wohl verbreitetste inferenzstatistische Tool. Während Ronald Fisher [-@fisher1925] die *p*-Werte als graduelles Maß für die Evidenz gegen eine Nullhypothese (Punkthypothese) entwickelte, kombinierten Jerzy Neyman und Egon Pearson [-@neyman1933] dieses Konzept mit dem von ihnen entwickelten Hypothesentest-Framework ($\alpha$- und $\beta$-Fehler etc.).
+
+::: customcallout
+## 💡 Definition *p*-Wert
+Konzeptuell können *p*-Werte als die bedingte Wahrscheinlichkeit definiert werden, mit der unter der Annahme der Gültigkeit der Nullhypothese die vorliegen Daten oder noch extremer gegen die Nullhypothese sprechende Daten beobachtet werden.
+
+$$\text{p-Wert}= P\left(\text{vorl. o. extremer gegen }H_0\text{ sprechende Daten} | H_0 \text{ ist wahr}\right)$$
+:::
+
+### Beispielhafte *p*-Wert Berechnung
+
+Angenommen wir haben die folgenden Hypothesen & Daten:
+
+* Hypothesen 
+    * Nullhypothese: <br>
+    *Der Anteil der Befürworter\*innen von G9 (vs G8)≤ 50%.* 
+    * Alternativhypothese: <br>
+    *Mehr als 50% der Eltern befürworten G9 (vs G8).*
+* Daten: 
+    * 3 »für G9«
+    * 1 »für G8«
+
+![](img/BinomBaumG9.svg){.lightbox}
+
+### Typische *p*-Wert-Fehlkonzepte
+ In der Praxis wird jedoch häufig eine Mischung aus beiden Ansätzen verwendet, was zu Missverständnissen und Fehlinterpretationen führen kann @greenland2016. z.B.:
+
+-   The P value is the probability that the test hypothesis is true ❌
+
+-   The P value for the null hypothesis is the probability that chance alone produced the observed association ❌
+
+-   A significant test result (P ≤ 0.05) means that the test hypothesis is false ❌
+
+-   A nonsignificant test result (P \> 0.05) means that the test hypothesis is true or should be accepted ❌
+
+-   A large P value is evidence in favor of the test hypothesis ❌
+
+-   Lack of statistical significance indicates that the effect size is small ❌
+
+## Bayes Faktoren
+Bayes Faktoren sind ein zentrales Werkzeug der bayesianischen Statistik zur Bewertung von Hypothesen anhand von Daten. Sie quantifizieren die relative Evidenz, die die Daten für eine Hypothese im Vergleich zu einer anderen Hypothese liefern. Ausgangspunkt ist dabei das Bayes Theorem, das zwei eine
+bedingte Wahrscheinlichkeit eines datengenerierenden Modells $\mathscr{M}_1$ gegeben Daten $d$ mit der umgekehrten bedingten Wahrscheinlichkeit der Daten gegeben dem Modell relationiert:
+
+$$P\left(\mathscr{M}_1 \mid d\right)=\frac{p\left(d \mid \mathscr{M}_1\right) P\left(\mathscr{M}_1\right)}{P(d)}$$
+
+Wendet man dieses Theorem auf ein konkurrierendes Modelle $\mathscr{M}_1$ an und betrachtet die posterior Odds $\frac{P\left(\mathscr{M}_1 \mid d\right)}{P\left(\mathscr{M}_0 \mid d\right)}$, so erhält man die Definition des Bayes Faktors $BF_{10}$:
+
+::: customcallout
+## 💡 Definition Bayes Faktor
+Konzeptuell können Bayes Faktoren als das Verhältnis der Wahrscheinlichkeit der vorliegenden Daten unter zwei konkurrierenden Modellen definiert werden:
+
+$$
+\underbrace{\frac{P\left(\mathscr{M}_1 \mid d\right)}{P\left(\mathscr{M}_0 \mid d\right)}}_{\text {Posterior odds }}=\underbrace{\frac{p\left(d \mid \mathscr{M}_1\right)}{p\left(d \mid \mathscr{M}_0\right)}}_{\mathrm{BF}_{10}(d)} \underbrace{\frac{P\left(\mathscr{M}_1\right)}{P\left(\mathscr{M}_0\right)}}_{\text {Prior odds }}
+$$
+:::
+
+Er heisst also »Faktor«, weil er multipliziert mit den a priori zu bestimmenden Prior odds multipliziert, die posterior odds ergibt. Der Bayes Faktor quantifiziert also, wie stark die Daten die a priori relative Plausibilität zweier Modelle verändern/updaten.
+
+### Beispielhafte Bayes-Faktor-Berechnung
+Besonders einfach sind Bayes Faktoren für Punkthypothesen zu berechnen. Wichtig ist dabei, dass »Hypothese« und »datengenerierendes Modell« hier oft synonym verwendet werden.
+
 
 ::: column-page-right
-```{shinylive-r}
-#| standalone: true
-#| viewerHeight: 800
 
-library(bslib)
-library(shiny)
-library(ggplot2)
-library(tibble)
-library(dplyr)
-library(munsell)
-library(shinyjs)
+::: {.customcallout}
+## Beispiel
+Angenommen zwei Bildungspolitiker:innen streiten sich über die Verbreitung der Elternmeinung zur Befürwortung von G8 vs. G9. Die eine Politikerin behauptet, dass 40% der Eltern G9 befürworten, die andere Politikerin behauptet, dass 60% der Eltern G9 befürworten. In einer »Studie« wurden 10 Proband:innen befragt und genau 8 davon waren pro G9, 2 pro G8. In der interaktiven App unten repräsentiert der Quotion der vertikalen [orangenen]{style="color: #d77;"} und [grünen]{style="color: #267326;"} Strecken den Bayes Faktor.
 
-ui <- page_fluid(
-  theme = bs_theme(
-    "bg-primary" = "#1bbc9d50",
-    # Controls the accent (e.g., hyperlink, button, etc) colors
-    primary = "#267326",
-    secondary = "#267326",
-    "input-border-color" = "#267326"
-  ),
-  h5(""),
-    layout_column_wrap(
-  card(
-      card_header(class = "bg-primary", "Punkthypothesen"),
-      card_body(
-        sliderInput(
-          "theta1",
-          "Hypothese 1: Anteil Pro G9",
-          min = 0,
-          max = 1,
-          value = .4,
-          step = .1
-        ),
-        sliderInput(
-          "theta2",
-          "Hypothese 2: Anteil Pro G9",
-          min = 0,
-          max = 1,
-          value = .6,
-          step = .1
-        )
-      )
-    ),
-    card(
-      card_header(class = "bg-primary", "Daten"),
-      card_body(
-        numericInput(
-          "prog9",
-          "n₁ = Befürwortung G9",
-          min = 0,
-          value = 10,
-          step = 1
-        ),
-        numericInput(
-          "prog8",
-          "n₂ = Befürwortung G8",
-          min = 0,
-          value = 5,
-          step = 1
-        )
-      )
-    )
-  ),
-  card(
-    card_header("Likelihoods und Bayes Factor", class = "bg-primary"),
-    #card_body(shinycssloaders::withSpinner(
-    plotOutput("plot"),
-    #  color = "#267326"
-    #))
-  )
-)
-
-
-server <- function(input, output, session) {
-  # n <- 30 # N()
-  # obs <- 20 input$prog9
-  # theta1 <- .5 # input$theta1
-  # theta2 <- .7 # input$theta2
-  # wkeit1 <- choose(n, obs)*theta1^obs*(1-theta1)^(n-obs) # wkeit1()
-  # wkeit2 <- choose(n, obs)*theta2^obs*(1-theta2)^(n-obs) # wkeit2()
-
-  ### custom reactive values #####################################################
-  N <- reactive({
-    input$prog8 + input$prog9
-  })
-
-  wkeit1 <-
-    reactive({
-      choose(N(), input$prog9) *
-        input$theta1^input$prog9 *
-        (1 - input$theta1)^(N() - input$prog9)
-    })
-
-  wkeit2 <-
-    reactive({
-      choose(N(), input$prog9) *
-        input$theta2^input$prog9 *
-        (1 - input$theta2)^(N() - input$prog9)
-    })
-
-  ### create data ################################################################
-  data <- reactive({
-    return(
-      rbind(
-        tibble(
-          k = 1:N(),
-          p = choose(N(), k) * input$theta1^k * (1 - input$theta1)^(N() - k),
-          theta = as.character(input$theta1)
-        ),
-        tibble(
-          k = 1:N(),
-          p = choose(N(), k) * input$theta2^k * (1 - input$theta2)^(N() - k),
-          theta = as.character(input$theta2)
-        )
-      ) %>%
-        mutate(obs_eq_k = k == N()) %>%
-        as_tibble()
-    )
-  })
-
-  ### plot #######################################################################
-  output$plot <- renderPlot({
-    ggplot() +
-      # add whole binomial distributions with alpha
-      geom_segment(
-        data = data() %>%
-          filter(theta == input$theta1),
-        aes(x = k - .1, xend = k - .1, y = 0, yend = p),
-        color = "#26732650",
-        linewidth = 2
-      ) +
-      geom_segment(
-        data = data() %>%
-          filter(theta == input$theta2),
-        aes(x = k + .1, xend = k + .1, y = 0, yend = p),
-        color = "#d77d0050",
-        linewidth = 2
-      ) +
-      # add selected binomial distributions without alpha
-      geom_segment(
-        data = data() %>%
-          filter(theta == input$theta1 & k == input$prog9),
-        aes(x = k - .1, xend = k - .1, y = 0, yend = p, color = "#267326"),
-        linewidth = 2
-      ) +
-      geom_segment(
-        data = data() %>%
-          filter(theta == input$theta2 & k == input$prog9),
-        aes(x = k + .1, xend = k + .1, y = 0, yend = p, color = "#d77d00"),
-        linewidth = 2
-      ) +
-      theme_minimal() +
-      geom_text(
-        data = tibble(
-          x = input$prog9,
-          y = -.005,
-          text = paste(
-            "BF =",
-            formatC(wkeit1() / wkeit2(), format = "e", digits = 2)
-          )
-        ),
-        aes(x, y, label = text)
-      ) +
-      xlab("Anzahl") +
-      ylab("Wahrscheinlichkeit") +
-      ggtitle("Berechnung des Bayes-Faktors", "bei Punkthypothesen") +
-      scale_color_identity(
-        name = "Likelihood",
-        breaks = c("#bc991b", "#bc1b9a"),
-        labels = c("Hyp. 1", "Hyp 2."),
-        guide = "legend"
-      )
-  })
-
-  ### debug ######################################################################
-  output$debug <- renderPrint({
-    data()
-  })
-}
-
-shinyApp(ui = ui, server = server)
+```{=html}
+<iframe width="100%" height="900" src="app.html" title="Bayes factor App 1"></iframe>
 ```
 :::
+:::
+
+### Bayesfaktoren mit a priori Verteilungshypothesen
+Die zuvor gemachten Hypothesen (Punkthypothesen: »genau 40%« bzw. »genau 60%«) sind in der Praxis eher selten bzw. unnütz. Wesentlich realistischer ist es a priori Hypothesen/Modelle anzunehmen, die verschiedenen Prozentsätzen verschiedene Plausibilität zuordnen (siehe folgende interaktive App oben). Dies kann durch die Angabe von Wahrscheinlichkeitsverteilungen (z.B. Beta-Verteilungen im Fall von Anteilen) erfolgen. Das Problem ist nun, dass man den Bayes Faktor nicht mehr wie zuvor berechnen kann, weil man ja keinen festen Wert/Prozentsatz für die Hypothese hat - man weiß nicht »welche Wahrscheinlichkeit man an das Bäumchen schreiben soll«. Harold Jeffreys [-@jeffreys1998theory] geniale Lösung hierfür ist es, die Wahrscheinlichkeit der Daten für jeden Anteil der G9-Befürworter:innen $\theta$ zu berechnen und diese dann gewichtet nach der a priori Verteilungshypothese zu mitteln:
+
+$$
+\frac{p\left(d \mid \mathscr{M}_1\right)}{p\left(d \mid \mathscr{M}_2\right)} = \frac{p\left(d \mid \mathscr{M}_1\right)=\int f\left(d \mid \theta_1, \mathscr{M}_1\right)  \cdot \pi_1\left(\theta_1\right) \; \mathrm{d} \theta_1}{p\left(d \mid \mathscr{M}_2\right)=\int f\left(d \mid \theta_2, \mathscr{M}_2\right) \cdot \pi_2\left(\theta_2\right) \; \mathrm{d} \theta_2}
+$$
+
+::: column-page-right
+
+```{=html}
+<iframe width="100%" height="900" src="app3.html" title="Bayes factor App 1"></iframe>
+```
+:::
+
+## Frequentistische Parameterschätzung (Konfidenzintervalle)
+Ein sehr hilfreiche Visualisierung um das Konzept von Konfidenzintervallen zu verstehen, ist die folgende (interaktive App)[https://rpsychologist.com/d3/ci/]
+
+## Bayesianische Parameterschätzung (Credibility Intervalle)
+::: column-page-right
+```{=html}
+<iframe width="100%" height="1100" src="app2.html" title="Quarto Documentation"></iframe>
+```
+:::
+
+## Die ROPE-Testing-Prozedur
+
+
+## Literatur

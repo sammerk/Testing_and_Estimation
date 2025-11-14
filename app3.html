@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayes Factor mit Beta-Priors</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container-fluid {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .card {
+            background-color: #f2f2f2;
+            margin-bottom: 0;
+        }
+        
+        .card-body {
+            background-color: #f2f2f2;
+        }
+        
+        .row {
+            margin: 0;
+        }
+        
+        .row.spacing {
+            margin-top: 15px !important;
+        }
+        
+        .card-header.bg-primary {
+            background-color: #267326 !important;
+            color: white !important;
+        }
+        
+        input[type="range"] {
+            accent-color: #267326;
+        }
+        
+        /* Firefox */
+        input[type="range"]::-moz-range-thumb {
+            background-color: #267326;
+        }
+        
+        /* Chrome, Safari, Opera */
+        input[type="range"]::-webkit-slider-thumb {
+            background-color: #267326;
+        }
+        
+        input[type="number"] {
+            border-color: #267326;
+        }
+        
+        input[type="number"]:focus {
+            border-color: #267326;
+            box-shadow: 0 0 0 0.25rem rgba(27, 188, 157, 0.25);
+        }
+        
+        .slider-container {
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .slider-ticks {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 8px;
+            margin-top: 5px;
+        }
+        
+        .slider-tick {
+            font-size: 0.85em;
+            color: #666;
+        }
+        
+        .slider-value-display {
+            font-weight: bold;
+            margin-left: 10px;
+            color: #267326;
+        }
+        
+        .equal-height-row {
+            display: flex;
+        }
+        
+        .equal-height-row .card {
+            height: 100%;
+        }
+        
+        .prior-plot-canvas {
+            max-width: 100%;
+            height: 200px;
+        }
+        
+        #likelihoodCanvas {
+            max-width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row equal-height-row">
+            <!-- Hypothese 1 -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary">Hypothese 1</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="slider-container">
+                                    <label for="prior_mu1">Mittelwert Hypothese 1 <span id="priorMu1Value" class="slider-value-display">.42</span></label>
+                                    <input type="range" id="prior_mu1" min="0" max="1" step="0.01" value="0.42" class="form-range">
+                                    <div class="slider-ticks">
+                                        <span class="slider-tick">0.0</span>
+                                        <span class="slider-tick">0.25</span>
+                                        <span class="slider-tick">0.5</span>
+                                        <span class="slider-tick">0.75</span>
+                                        <span class="slider-tick">1.0</span>
+                                    </div>
+                                </div>
+                                <div class="slider-container">
+                                    <label for="prior_phi1">Präzision Hypothese 1 <span id="priorPhi1Value" class="slider-value-display">13</span></label>
+                                    <input type="range" id="prior_phi1" min="2" max="100" step="1" value="13" class="form-range">
+                                    <div class="slider-ticks">
+                                        <span class="slider-tick">2</span>
+                                        <span class="slider-tick">25</span>
+                                        <span class="slider-tick">50</span>
+                                        <span class="slider-tick">75</span>
+                                        <span class="slider-tick">100</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <canvas id="prior1Canvas" class="prior-plot-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hypothese 2 -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary">Hypothese 2</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="slider-container">
+                                    <label for="prior_mu2">Mittelwert Hypothese 2 <span id="priorMu2Value" class="slider-value-display">.65</span></label>
+                                    <input type="range" id="prior_mu2" min="0" max="1" step="0.01" value="0.65" class="form-range">
+                                    <div class="slider-ticks">
+                                        <span class="slider-tick">0.0</span>
+                                        <span class="slider-tick">0.25</span>
+                                        <span class="slider-tick">0.5</span>
+                                        <span class="slider-tick">0.75</span>
+                                        <span class="slider-tick">1.0</span>
+                                    </div>
+                                </div>
+                                <div class="slider-container">
+                                    <label for="prior_phi2">Präzision Hypothese 2 <span id="priorPhi2Value" class="slider-value-display">13</span></label>
+                                    <input type="range" id="prior_phi2" min="2" max="100" step="1" value="13" class="form-range">
+                                    <div class="slider-ticks">
+                                        <span class="slider-tick">2</span>
+                                        <span class="slider-tick">25</span>
+                                        <span class="slider-tick">50</span>
+                                        <span class="slider-tick">75</span>
+                                        <span class="slider-tick">100</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <canvas id="prior2Canvas" class="prior-plot-canvas"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row spacing equal-height-row">
+            <!-- Daten -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary">Daten</div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="prog9" class="form-label">n₁ = Befürwortung G9</label>
+                            <input type="number" class="form-control" id="prog9" min="0" step="1" value="5">
+                        </div>
+                        <div class="mb-3">
+                            <label for="prog8" class="form-label">n₂ = Befürwortung G8</label>
+                            <input type="number" class="form-control" id="prog8" min="0" step="1" value="12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Likelihoods und Bayes Factor -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary">Marginale Likelihoods und Bayes Factor</div>
+                    <div class="card-body">
+                        <canvas id="likelihoodCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Beta distribution PDF
+        function betaPDF(x, alpha, beta) {
+            if (x <= 0 || x >= 1) return 0;
+            
+            function gammaLn(z) {
+                return (z - 0.5) * Math.log(z) - z + 0.5 * Math.log(2 * Math.PI) +
+                       1 / (12 * z) - 1 / (360 * z * z * z);
+            }
+            
+            const lnBeta = gammaLn(alpha) + gammaLn(beta) - gammaLn(alpha + beta);
+            const logPdf = (alpha - 1) * Math.log(x) + (beta - 1) * Math.log(1 - x) - lnBeta;
+            
+            return Math.exp(logPdf);
+        }
+        
+        // Convert mu, phi to alpha, beta
+        function muPhiToShapes(mu, phi) {
+            return {
+                shape1: mu * phi,
+                shape2: (1 - mu) * phi
+            };
+        }
+        
+        // Binomial coefficient
+        function binomialCoeff(n, k) {
+            if (k < 0 || k > n) return 0;
+            if (k === 0 || k === n) return 1;
+            
+            k = Math.min(k, n - k);
+            let result = 1;
+            for (let i = 0; i < k; i++) {
+                result *= (n - i);
+                result /= (i + 1);
+            }
+            return result;
+        }
+        
+        // Beta-Binomial marginal likelihood
+        function betaBinomialMarginal(k, n, alpha, beta) {
+            // Compute log of beta-binomial probability
+            function logGamma(z) {
+                return (z - 0.5) * Math.log(z) - z + 0.5 * Math.log(2 * Math.PI) +
+                       1 / (12 * z) - 1 / (360 * z * z * z);
+            }
+            
+            const logBinom = logGamma(n + 1) - logGamma(k + 1) - logGamma(n - k + 1);
+            const logBeta1 = logGamma(alpha + k) + logGamma(beta + n - k) - logGamma(alpha + beta + n);
+            const logBeta2 = logGamma(alpha) + logGamma(beta) - logGamma(alpha + beta);
+            
+            return Math.exp(logBinom + logBeta1 - logBeta2);
+        }
+        
+        let prior1Chart = null;
+        let prior2Chart = null;
+        let likelihoodChart = null;
+        
+        function getInputs() {
+            return {
+                priorMu1: parseFloat(document.getElementById('prior_mu1').value),
+                priorPhi1: parseFloat(document.getElementById('prior_phi1').value),
+                priorMu2: parseFloat(document.getElementById('prior_mu2').value),
+                priorPhi2: parseFloat(document.getElementById('prior_phi2').value),
+                prog9: parseInt(document.getElementById('prog9').value) || 0,
+                prog8: parseInt(document.getElementById('prog8').value) || 0
+            };
+        }
+        
+        function updatePrior1() {
+            const inputs = getInputs();
+            const shapes = muPhiToShapes(inputs.priorMu1, inputs.priorPhi1);
+            
+            const numPoints = 1000;
+            const p = [];
+            const density = [];
+            
+            for (let i = 1; i < numPoints; i++) {
+                const x = i / numPoints;
+                p.push(x);
+                density.push(betaPDF(x, shapes.shape1, shapes.shape2));
+            }
+            
+            const ctx = document.getElementById('prior1Canvas').getContext('2d');
+            
+            if (prior1Chart) {
+                prior1Chart.destroy();
+            }
+            
+            prior1Chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: p,
+                    datasets: [{
+                        label: 'Prior 1',
+                        data: density,
+                        borderColor: '#267326',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 0 },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: { display: true, text: "Anteil G9-Befürworter:innen θ₁" },
+                            min: 0,
+                            max: 1,
+                            ticks: { stepSize: 0.2 }
+                        },
+                        y: {
+                            title: { display: true, text: "W'keitsdichte π(θ₁)" },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updatePrior2() {
+            const inputs = getInputs();
+            const shapes = muPhiToShapes(inputs.priorMu2, inputs.priorPhi2);
+            
+            const numPoints = 1000;
+            const p = [];
+            const density = [];
+            
+            for (let i = 1; i < numPoints; i++) {
+                const x = i / numPoints;
+                p.push(x);
+                density.push(betaPDF(x, shapes.shape1, shapes.shape2));
+            }
+            
+            const ctx = document.getElementById('prior2Canvas').getContext('2d');
+            
+            if (prior2Chart) {
+                prior2Chart.destroy();
+            }
+            
+            prior2Chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: p,
+                    datasets: [{
+                        label: 'Prior 2',
+                        data: density,
+                        borderColor: '#d77d00',
+                        backgroundColor: 'transparent',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 0 },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            title: { display: true, text: "Anteil G9-Befürworter:innen θ₂" },
+                            min: 0,
+                            max: 1,
+                            ticks: { stepSize: 0.2 }
+                        },
+                        y: {
+                            title: { display: true, text: "W'keitsdichte π(θ₂)" },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+        
+        function updateLikelihoodPlot() {
+            const inputs = getInputs();
+            const shapes1 = muPhiToShapes(inputs.priorMu1, inputs.priorPhi1);
+            const shapes2 = muPhiToShapes(inputs.priorMu2, inputs.priorPhi2);
+            const N = inputs.prog9 + inputs.prog8;
+            
+            if (N === 0) return;
+            
+            // Calculate marginal likelihoods for all k
+            const data1 = [];
+            const data2 = [];
+            
+            for (let k = 1; k <= N; k++) {
+                data1.push({
+                    k: k,
+                    p: betaBinomialMarginal(k, N, shapes1.shape1, shapes1.shape2)
+                });
+                data2.push({
+                    k: k,
+                    p: betaBinomialMarginal(k, N, shapes2.shape1, shapes2.shape2)
+                });
+            }
+            
+            // Calculate BF
+            const wkeit1 = betaBinomialMarginal(inputs.prog9, N, shapes1.shape1, shapes1.shape2);
+            const wkeit2 = betaBinomialMarginal(inputs.prog9, N, shapes2.shape1, shapes2.shape2);
+            const bf = wkeit1 / wkeit2;
+            
+            const ctx = document.getElementById('likelihoodCanvas').getContext('2d');
+            
+            if (likelihoodChart) {
+                likelihoodChart.destroy();
+            }
+            
+            // Prepare bar chart data
+            const labels = Array.from({length: N}, (_, i) => i + 1);
+            const bars1All = data1.map(d => d.p);
+            const bars2All = data2.map(d => d.p);
+            
+            likelihoodChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Hyp. 1',
+                            data: bars1All,
+                            backgroundColor: bars1All.map((p, i) => (i + 1 === inputs.prog9) ? '#267326' : 'rgba(38, 115, 38, 0.3)'),
+                            borderColor: 'transparent',
+                            borderWidth: 0,
+                            barPercentage: 1.0,
+                            categoryPercentage: 0.8,
+                            order: 1
+                        },
+                        {
+                            label: 'Hyp. 2',
+                            data: bars2All,
+                            backgroundColor: bars2All.map((p, i) => (i + 1 === inputs.prog9) ? '#d77d00' : 'rgba(215, 125, 0, 0.3)'),
+                            borderColor: 'transparent',
+                            borderWidth: 0,
+                            barPercentage: 1.0,
+                            categoryPercentage: 0.8,
+                            order: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: { duration: 0 },
+                    plugins: {
+                        
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                filter: function(item) {
+                                    return item.text !== '';
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    if (context.dataset.label === '') return null;
+                                    return context.dataset.label + ': ' + context.parsed.y.toFixed(6);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Anzahl' },
+                            offset: true,
+                            grid: {
+                                display: false
+                            }
+                        },
+                        y: {
+                            title: { display: true, text: 'Wahrscheinlichkeit' },
+                            beginAtZero: true,
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                },
+                plugins: [{
+                    id: 'bfAnnotation',
+                    afterDatasetsDraw: function(chart) {
+                        const ctx = chart.ctx;
+                        const xAxis = chart.scales.x;
+                        const yAxis = chart.scales.y;
+                        
+                        const bfText = 'BF = ' + bf.toExponential(2);
+                        const xText = xAxis.getPixelForValue(inputs.prog9);
+                        const yText = yAxis.getPixelForValue(0) + 35;
+                        
+                        ctx.save();
+                        ctx.font = '14px Arial';
+                        ctx.fillStyle = '#000';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(bfText, xText, yText);
+                        ctx.restore();
+                    }
+                }]
+            });
+        }
+        
+        function updateAll() {
+            updatePrior1();
+            updatePrior2();
+            updateLikelihoodPlot();
+        }
+        
+        // Event listeners
+        document.getElementById('prior_mu1').addEventListener('input', function(e) {
+            const value = parseFloat(e.target.value);
+            document.getElementById('priorMu1Value').textContent = value === 1 ? '1.00' : value.toFixed(2).substring(1);
+            updateAll();
+        });
+        
+        document.getElementById('prior_phi1').addEventListener('input', function(e) {
+            document.getElementById('priorPhi1Value').textContent = parseInt(e.target.value);
+            updateAll();
+        });
+        
+        document.getElementById('prior_mu2').addEventListener('input', function(e) {
+            const value = parseFloat(e.target.value);
+            document.getElementById('priorMu2Value').textContent = value === 1 ? '1.00' : value.toFixed(2).substring(1);
+            updateAll();
+        });
+        
+        document.getElementById('prior_phi2').addEventListener('input', function(e) {
+            document.getElementById('priorPhi2Value').textContent = parseInt(e.target.value);
+            updateAll();
+        });
+        
+        document.getElementById('prog9').addEventListener('input', updateAll);
+        document.getElementById('prog8').addEventListener('input', updateAll);
+        
+        // Initial render
+        updateAll();
+    </script>
+</body>
+</html>
