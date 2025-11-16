@@ -83,7 +83,6 @@ Ganz grundlegend kann a priori das Erkenntnisinteresse von Studien in die folgen
 : Erkenntisinteressen nach [@doering2016].
 :::
 
-
 ```{r}
 #| echo: false
 ifeb_names <- c("André", "Carolin", "Christian", "Erika", "Eva", "Fabian", "Florian", "Johanna", "Kirstin", "Kristina", "Liene", "Marina", "Max", "Michael", "Nilani", "Sarah", "Theresa", "Cora", "Martin")
@@ -93,34 +92,33 @@ present <- c(ifeb_names[!ifeb_names %in% not_present], additions)
 groups_long <- sample(present, length(present))
 ```
 
-
-::: {.customcallout collapse="true"}
-## 🧠 Arbeitsauftrag: 
+:::::: {.customcallout collapse="true"}
+## 🧠 Arbeitsauftrag:
 
 **Klassifiziert mit dem zugelosten Partnerin bzw. dem zugelosten Partner für euch aktuelle/interessante Forschungsfragen als Deskriptiv/Explorativ/Explanativ/Prädiktiv**
 
 Die Gruppen:
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
-* `r paste(groups_long[1:2], collapse = " 💝 ")`
-* `r paste(groups_long[3:4], collapse = " 💝 ")`
-* `r paste(groups_long[5:6], collapse = " 💝 ")`
-* `r paste(groups_long[7:8], collapse = " 💝 ")`
-* `r paste(groups_long[9:10], collapse = " 💝 ")`
-* `r paste(groups_long[11:12], collapse = " 💝 ")`
+-   `r paste(groups_long[1:2], collapse = " 💝 ")`
+-   `r paste(groups_long[3:4], collapse = " 💝 ")`
+-   `r paste(groups_long[5:6], collapse = " 💝 ")`
+-   `r paste(groups_long[7:8], collapse = " 💝 ")`
+-   `r paste(groups_long[9:10], collapse = " 💝 ")`
+-   `r paste(groups_long[11:12], collapse = " 💝 ")`
 :::
-::: {.column width="50%"}
-* `r paste(groups_long[13:14], collapse = " 💝 ")`
-* `r paste(groups_long[15:16], collapse = " 💝 ")`
-* `r paste(groups_long[17:18], collapse = " 💝 ")`
-* `r paste(groups_long[19:20], collapse = " 💝 ")`
-* `r paste(groups_long[21:22], collapse = " 💝 ")`
-* `r paste(groups_long[23:24], collapse = " 💝 ")`
-:::
-::::
 
+::: {.column width="50%"}
+-   `r paste(groups_long[13:14], collapse = " 💝 ")`
+-   `r paste(groups_long[15:16], collapse = " 💝 ")`
+-   `r paste(groups_long[17:18], collapse = " 💝 ")`
+-   `r paste(groups_long[19:20], collapse = " 💝 ")`
+-   `r paste(groups_long[21:22], collapse = " 💝 ")`
+-   `r paste(groups_long[23:24], collapse = " 💝 ")`
 :::
+:::::
+::::::
 
 ## Übersicht: Bayesianisches und frequentistisches Schätzen und Testen
 
@@ -151,47 +149,48 @@ Dies ist am leichtesten anhand der Nullhypothese nachvollziehbar. Wird etwa die 
 
 Äquivalenzhypothesen können sowohl frequentistisch [z.B. TOAST-Prozedur in R und JASP, @lakens2017] wie bayesianisch [z.B. ROPE-Ansatz @kruschke2015] getestet werden. Für das Testen informativer Hypothesen liegen bayesianische Methoden in (u.a.) JASP und R vor [z.B. `{bain}`, @gu2019] sowie in den frequentistischen R-Pakete `{restriktor}` [@vanbrabant2020] und `{ic.infer}` [@gromping2010].
 
-
 ```{r}
 #| echo: false
 groups_long <- sample(present, length(present))
 ```
 
-
-::: {.customcallout collapse="true"}
-## 🧠 Arbeitsauftrag: 
+:::::: {.customcallout collapse="true"}
+## 🧠 Arbeitsauftrag:
 
 **Pitched eurer Partnerin bzw. eurem Partner eine Hypothese, die ihr in letzter Zeit getestet habt. Dieser klassifiziert diese dann als Punkthypothese, Äquivalenzhypothese oder informative Hypothese**
 
 Die Gruppen:
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
-* `r paste(groups_long[1:2], collapse = " 💝 ")`
-* `r paste(groups_long[3:4], collapse = " 💝 ")`
-* `r paste(groups_long[5:6], collapse = " 💝 ")`
-* `r paste(groups_long[7:8], collapse = " 💝 ")`
-* `r paste(groups_long[9:10], collapse = " 💝 ")`
-* `r paste(groups_long[11:12], collapse = " 💝 ")`
+-   `r paste(groups_long[1:2], collapse = " 💝 ")`
+-   `r paste(groups_long[3:4], collapse = " 💝 ")`
+-   `r paste(groups_long[5:6], collapse = " 💝 ")`
+-   `r paste(groups_long[7:8], collapse = " 💝 ")`
+-   `r paste(groups_long[9:10], collapse = " 💝 ")`
+-   `r paste(groups_long[11:12], collapse = " 💝 ")`
 :::
+
 ::: {.column width="50%"}
-* `r paste(groups_long[13:14], collapse = " 💝 ")`
-* `r paste(groups_long[15:16], collapse = " 💝 ")`
-* `r paste(groups_long[17:18], collapse = " 💝 ")`
-* `r paste(groups_long[19:20], collapse = " 💝 ")`
-* `r paste(groups_long[21:22], collapse = " 💝 ")`
-* `r paste(groups_long[23:24], collapse = " 💝 ")`
+-   `r paste(groups_long[13:14], collapse = " 💝 ")`
+-   `r paste(groups_long[15:16], collapse = " 💝 ")`
+-   `r paste(groups_long[17:18], collapse = " 💝 ")`
+-   `r paste(groups_long[19:20], collapse = " 💝 ")`
+-   `r paste(groups_long[21:22], collapse = " 💝 ")`
+-   `r paste(groups_long[23:24], collapse = " 💝 ")`
 :::
-::::
-:::
+:::::
+::::::
 
 ## Frequentistisches Testen
 
 ### Was sind *p*-Werte?
+
 In den Sozialwissenschaften sind *p*-Werte das wohl verbreitetste inferenzstatistische Tool. Während Ronald Fisher [-@fisher1925] die *p*-Werte als graduelles Maß für die Evidenz gegen eine Nullhypothese (Punkthypothese) entwickelte, kombinierten Jerzy Neyman und Egon Pearson [-@neyman1933] dieses Konzept mit dem von ihnen entwickelten Hypothesentest-Framework ($\alpha$- und $\beta$-Fehler etc.).
 
 ::: customcallout
 ## 💡 Definition *p*-Wert
+
 Konzeptuell können *p*-Werte als die bedingte Wahrscheinlichkeit definiert werden, mit der unter der Annahme der Gültigkeit der Nullhypothese die vorliegen Daten oder noch extremer gegen die Nullhypothese sprechende Daten beobachtet werden.
 
 $$\text{p-Wert}= P\left(\text{vorl. o. extremer gegen }H_0\text{ sprechende Daten} | H_0 \text{ ist wahr}\right)$$
@@ -201,35 +200,161 @@ $$\text{p-Wert}= P\left(\text{vorl. o. extremer gegen }H_0\text{ sprechende Date
 
 Angenommen wir haben die folgenden Hypothesen & Daten:
 
-* Hypothesen 
-    * Nullhypothese: <br>
-    *Der Anteil der Befürworter\*innen von G9 (vs G8)≤ 50%.* 
-    * Alternativhypothese: <br>
-    *Mehr als 50% der Eltern befürworten G9 (vs G8).*
-* Daten: 
-    * 3 »für G9«
-    * 1 »für G8«
+-   Hypothesen
+    -   Nullhypothese: <br> *Der Anteil der Befürworter\*innen von G9 (vs G8)≤ 50%.*
+    -   Alternativhypothese: <br> *Mehr als 50% der Eltern befürworten G9 (vs G8).*
+-   Daten:
+    -   3 »für G9«
+    -   1 »für G8«
 
 ![](img/BinomBaumG9.svg){.lightbox}
 
 ### Typische *p*-Wert-Fehlkonzepte
- In der Praxis wird jedoch häufig eine Mischung aus beiden Ansätzen verwendet, was zu Missverständnissen und Fehlinterpretationen führen kann @greenland2016. z.B.:
+
+In der Praxis wird jedoch häufig eine Mischung aus beiden Ansätzen verwendet, was zu Missverständnissen und Fehlinterpretationen führen kann @greenland2016. z.B.:
 
 -   The P value is the probability that the test hypothesis is true ❌
 
 -   The P value for the null hypothesis is the probability that chance alone produced the observed association ❌
 
--   A significant test result (P ≤ 0.05) means that the test hypothesis is false ❌
+-   A significant test result ($P \leq .05$) means that the test hypothesis is false ❌
 
--   A nonsignificant test result (P \> 0.05) means that the test hypothesis is true or should be accepted ❌
+-   A nonsignificant test result ($P > .05$) means that the test hypothesis is true or should be accepted ❌
 
 -   A large P value is evidence in favor of the test hypothesis ❌
 
 -   Lack of statistical significance indicates that the effect size is small ❌
 
+
+```{r}
+#| echo: false
+groups_long <- sample(present, length(present))
+```
+
+:::::: {.customcallout collapse="true"}
+## 🧠 Arbeitsauftrag:
+
+**Welche p-Wert-Fehlkonzepte a) beobachtet ihr am häufigsten b) findet ihr am unverständlichsten?**
+
+Die Gruppen:
+
+::::: columns
+::: {.column width="50%"}
+-   `r paste(groups_long[1:2], collapse = " 💝 ")`
+-   `r paste(groups_long[3:4], collapse = " 💝 ")`
+-   `r paste(groups_long[5:6], collapse = " 💝 ")`
+-   `r paste(groups_long[7:8], collapse = " 💝 ")`
+-   `r paste(groups_long[9:10], collapse = " 💝 ")`
+-   `r paste(groups_long[11:12], collapse = " 💝 ")`
+:::
+
+::: {.column width="50%"}
+-   `r paste(groups_long[13:14], collapse = " 💝 ")`
+-   `r paste(groups_long[15:16], collapse = " 💝 ")`
+-   `r paste(groups_long[17:18], collapse = " 💝 ")`
+-   `r paste(groups_long[19:20], collapse = " 💝 ")`
+-   `r paste(groups_long[21:22], collapse = " 💝 ")`
+-   `r paste(groups_long[23:24], collapse = " 💝 ")`
+:::
+:::::
+::::::
+
+
+## Parameterschätzung
+
+### Wahrscheinlichkeitsbegriffe
+
+In der frequentistischen Statistik wird Wahrscheinlichkeit als der Grenzwert der relativen Häufigkeit eines Ereignisses in unendlich vielen Wiederholungen eines Zufallsexperiments konzeptualisiert. Demgegenüber wird in der bayesianischen Statistik Wahrscheinlichkeit als Maß für die Sicherheit des eintreten eines Ereignisses verstanden.
+
+| Frequentistisch | Bayesianisch |
+|------------------------------------|------------------------------------|
+| Eine faire Münze hat eine Wahrscheinlichkeit von 0.5 für »Kopf«, weil bei unendlich vielen Würfen der Anteil der »Kopf«-Würfe gegen 50% konvergiert. | Eine faire Münze hat eine Wahrscheinlichkeit von 0.5 für »Kopf«, weil 0,5 die Mitte zwischen »vollkommen sicher Kopf« und »vollkommen sicher Zahl« ist. |
+| ![](img/FWkeit.svg) | ![](img/BWkeit.svg) |
+
+: Wahrscheinlichkeitsbegriffe
+
+Aus diesen unterschiedlichen Wahrscheinlichkeitsbegriffen ergeben sich in der frequentistischen und bayesianischen Statistik unterschiedliche Interpretationen von Unsicherheiten in der Parameterschätzung die oft als Konfidenzintervalle (frequentistisch) bzw. Credibility Intervalle (bayesianisch) operationalisiert werden.
+
+### Bayesianische Parameterschätzung (Credibility Intervalle)
+Credibilityintervalle werden dann aus dieser Posteriorverteilung abgeleitet.
+Um Parameter eines statistischen Modells (z.B. Intercept und Slope in einer Regressionsanalyse, Anteil $\theta$ an G9 Befürworter:innen) zu schätzen, wird im bayesianischen Paradigma die a priori Annahme über die Verteilung des Parameters (Prior) mit den vorliegenden Daten (Likelihood) kombiniert, um via des Satz von Bayes eine a posteriori Verteilung des Parameters (Posterior) zu erhalten. Aus dieser lässt sich dann sowohl die Punktschätzung (z.B. »Maximum a Postiori«), als auch dessen Unsicherheit (z.B. »Highest Density Intervals«) ableiten.
+
+::: customcallout
+## 💡 Satz von Bayes
+$$\text{Posterior}=\frac{\text{Likelihood} \times \text{Prior}}{\text{Evidenz}}$$
+
+$$P(\theta \mid d)=\frac{p(d \mid \theta) \cdot P(\theta)}{P(d)}$$
+:::
+
+Credibilityintervalle um Parameterpunktschätzungen enthalten entlang der bayesianischen Wahrscheinlichkeitsdefinition Aussagen darüber, mit welcher Wahrscheinlichkeit der wahre Parameterwert in einem bestimmten Intervall liegt. 
+
+::: column-page-right
+
+```{=html}
+<iframe width="100%" height="875" src="app2.html" title="Quarto Documentation"></iframe>
+```
+:::
+
+
+```{r}
+#| echo: false
+groups_long <- sample(present, length(present))
+```
+
+:::::: {.customcallout collapse="true"}
+## 🧠 Arbeitsauftrag:
+
+1) Beobachtet in der App wie die Präzision des Priors (bei konstantem Mittelwert) den Posterior beinflusst.
+2) Beobachtet in der App wie recht stark vom Prior divergierende Daten den Posterior beinflussen wenn die Datenmenge sehr groß wird.
+
+Die Gruppen:
+
+::::: columns
+::: {.column width="50%"}
+-   `r paste(groups_long[1:2], collapse = " 💝 ")`
+-   `r paste(groups_long[3:4], collapse = " 💝 ")`
+-   `r paste(groups_long[5:6], collapse = " 💝 ")`
+-   `r paste(groups_long[7:8], collapse = " 💝 ")`
+-   `r paste(groups_long[9:10], collapse = " 💝 ")`
+-   `r paste(groups_long[11:12], collapse = " 💝 ")`
+:::
+
+::: {.column width="50%"}
+-   `r paste(groups_long[13:14], collapse = " 💝 ")`
+-   `r paste(groups_long[15:16], collapse = " 💝 ")`
+-   `r paste(groups_long[17:18], collapse = " 💝 ")`
+-   `r paste(groups_long[19:20], collapse = " 💝 ")`
+-   `r paste(groups_long[21:22], collapse = " 💝 ")`
+-   `r paste(groups_long[23:24], collapse = " 💝 ")`
+:::
+:::::
+::::::
+
+
+
+### Frequentistische Parameterschätzung (Konfidenzintervalle)
+
+Konfidenzintervalle um Parameterpunktschätzungen enthalten entlang der frequentistischen Wahrscheinlichkeitsdefinition Aussagen darüber, welcher Anteil von Konfidenzintervallen (in the long run) den wahren Parameterwert enthält. 
+
+![Animation von https://rpsychologist.com/d3/ci/](img/CI2.gif)
+
+## Die ROPE-Testing-Prozedur
+
+Sowohl Credibilityintervalle als auch Konfidenzintervalle können genutzt werden, um Äquivalenzhypothesen zu testen. Hierzu wird ein sogenanntes ROPE (Region of Practical Equivalence) definiert, das den Bereich von Parameterwerten beschreibt, die als praktisch äquivalent zur Nullhypothese angesehen werden (z.B. Bevölkerung ist »quasi unentschieden so lange $.47 < \theta_{pro\,G9} < .53$)«. Die Lage des Credibility- bzw. Konfidenzintervalls in Bezug auf das ROPE entscheidet dann über die Evidenz für oder gegen die Äquivalenznullhypothese:
+
+| Lage                                   | Testentscheidung |
+|----------------------------------------|------------------|
+| CI bzw. CrI vollständig innerhalb ROPE | $H_0$ annehmen   |
+| CI bzw. CrI vollständig außerhalb ROPE | $H_1$ annehmen   |
+| sonst                                  | inkonklusiv      |
+
+: ROPE-Testprozedur
+
+
+
 ## Bayes Faktoren
-Bayes Faktoren sind ein zentrales Werkzeug der bayesianischen Statistik zur Bewertung von Hypothesen anhand von Daten. Sie quantifizieren die relative Evidenz, die die Daten für eine Hypothese im Vergleich zu einer anderen Hypothese liefern. Ausgangspunkt ist dabei das Bayes Theorem, das zwei eine
-bedingte Wahrscheinlichkeit eines datengenerierenden Modells $\mathscr{M}_1$ gegeben Daten $d$ mit der umgekehrten bedingten Wahrscheinlichkeit der Daten gegeben dem Modell relationiert:
+
+Bayes Faktoren sind ein zentrales Werkzeug der bayesianischen Statistik zur Bewertung von Hypothesen anhand von Daten. Sie quantifizieren die relative Evidenz, die die Daten für eine Hypothese im Vergleich zu einer anderen Hypothese liefern. Ausgangspunkt ist dabei das Bayes Theorem, das zwei eine bedingte Wahrscheinlichkeit eines datengenerierenden Modells $\mathscr{M}_1$ gegeben Daten $d$ mit der umgekehrten bedingten Wahrscheinlichkeit der Daten gegeben dem Modell relationiert:
 
 $$P\left(\mathscr{M}_1 \mid d\right)=\frac{p\left(d \mid \mathscr{M}_1\right) P\left(\mathscr{M}_1\right)}{P(d)}$$
 
@@ -237,6 +362,7 @@ Wendet man dieses Theorem auf ein konkurrierendes Modelle $\mathscr{M}_1$ an und
 
 ::: customcallout
 ## 💡 Definition Bayes Faktor
+
 Konzeptuell können Bayes Faktoren als das Verhältnis der Wahrscheinlichkeit der vorliegenden Daten unter zwei konkurrierenden Modellen definiert werden:
 
 $$
@@ -247,22 +373,23 @@ $$
 Er heisst also »Faktor«, weil er multipliziert mit den a priori zu bestimmenden Prior odds multipliziert, die posterior odds ergibt. Der Bayes Faktor quantifiziert also, wie stark die Daten die a priori relative Plausibilität zweier Modelle verändern/updaten.
 
 ### Beispielhafte Bayes-Faktor-Berechnung
+
 Besonders einfach sind Bayes Faktoren für Punkthypothesen zu berechnen. Wichtig ist dabei, dass »Hypothese« und »datengenerierendes Modell« hier oft synonym verwendet werden.
 
-
-::: column-page-right
-
-::: {.customcallout}
+:::: column-page-right
+::: customcallout
 ## Beispiel
+
 Angenommen zwei Bildungspolitiker:innen streiten sich über die Verbreitung der Elternmeinung zur Befürwortung von G8 vs. G9. Die eine Politikerin behauptet, dass 40% der Eltern G9 befürworten, die andere Politikerin behauptet, dass 60% der Eltern G9 befürworten. In einer »Studie« wurden 10 Proband:innen befragt und genau 8 davon waren pro G9, 2 pro G8. In der interaktiven App unten repräsentiert der Quotion der vertikalen [orangenen]{style="color: #d77;"} und [grünen]{style="color: #267326;"} Strecken den Bayes Faktor.
 
 ```{=html}
 <iframe width="100%" height="900" src="app.html" title="Bayes factor App 1"></iframe>
 ```
 :::
-:::
+::::
 
 ### Bayesfaktoren mit a priori Verteilungshypothesen
+
 Die zuvor gemachten Hypothesen (Punkthypothesen: »genau 40%« bzw. »genau 60%«) sind in der Praxis eher selten bzw. unnütz. Wesentlich realistischer ist es a priori Hypothesen/Modelle anzunehmen, die verschiedenen Prozentsätzen verschiedene Plausibilität zuordnen (siehe folgende interaktive App oben). Dies kann durch die Angabe von Wahrscheinlichkeitsverteilungen (z.B. Beta-Verteilungen im Fall von Anteilen) erfolgen. Das Problem ist nun, dass man den Bayes Faktor nicht mehr wie zuvor berechnen kann, weil man ja keinen festen Wert/Prozentsatz für die Hypothese hat - man weiß nicht »welche Wahrscheinlichkeit man an das Bäumchen schreiben soll«. Harold Jeffreys [-@jeffreys1998theory] geniale Lösung hierfür ist es, die Wahrscheinlichkeit der Daten für jeden Anteil der G9-Befürworter:innen $\theta$ zu berechnen und diese dann gewichtet nach der a priori Verteilungshypothese zu mitteln:
 
 $$
@@ -270,23 +397,10 @@ $$
 $$
 
 ::: column-page-right
-
 ```{=html}
 <iframe width="100%" height="900" src="app3.html" title="Bayes factor App 1"></iframe>
 ```
 :::
-
-## Frequentistische Parameterschätzung (Konfidenzintervalle)
-Ein sehr hilfreiche Visualisierung um das Konzept von Konfidenzintervallen zu verstehen, ist die folgende (interaktive App)[https://rpsychologist.com/d3/ci/]
-
-## Bayesianische Parameterschätzung (Credibility Intervalle)
-::: column-page-right
-```{=html}
-<iframe width="100%" height="1100" src="app2.html" title="Quarto Documentation"></iframe>
-```
-:::
-
-## Die ROPE-Testing-Prozedur
 
 
 ## Literatur

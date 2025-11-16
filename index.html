@@ -137,7 +137,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Veröffentlichungsdatum</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">14. November 2025</p>
+        <p class="date">16. November 2025</p>
       </div>
     </div>
     
@@ -168,14 +168,18 @@ window.Quarto = {
   <li><a href="#beispielhafte-p-wert-berechnung" id="toc-beispielhafte-p-wert-berechnung" class="nav-link" data-scroll-target="#beispielhafte-p-wert-berechnung">Beispielhafte <em>p</em>-Wert Berechnung</a></li>
   <li><a href="#typische-p-wert-fehlkonzepte" id="toc-typische-p-wert-fehlkonzepte" class="nav-link" data-scroll-target="#typische-p-wert-fehlkonzepte">Typische <em>p</em>-Wert-Fehlkonzepte</a></li>
   </ul></li>
+  <li><a href="#parameterschätzung" id="toc-parameterschätzung" class="nav-link" data-scroll-target="#parameterschätzung">Parameterschätzung</a>
+  <ul class="collapse">
+  <li><a href="#wahrscheinlichkeitsbegriffe" id="toc-wahrscheinlichkeitsbegriffe" class="nav-link" data-scroll-target="#wahrscheinlichkeitsbegriffe">Wahrscheinlichkeitsbegriffe</a></li>
+  <li><a href="#bayesianische-parameterschätzung-credibility-intervalle" id="toc-bayesianische-parameterschätzung-credibility-intervalle" class="nav-link" data-scroll-target="#bayesianische-parameterschätzung-credibility-intervalle">Bayesianische Parameterschätzung (Credibility Intervalle)</a></li>
+  <li><a href="#frequentistische-parameterschätzung-konfidenzintervalle" id="toc-frequentistische-parameterschätzung-konfidenzintervalle" class="nav-link" data-scroll-target="#frequentistische-parameterschätzung-konfidenzintervalle">Frequentistische Parameterschätzung (Konfidenzintervalle)</a></li>
+  </ul></li>
+  <li><a href="#die-rope-testing-prozedur" id="toc-die-rope-testing-prozedur" class="nav-link" data-scroll-target="#die-rope-testing-prozedur">Die ROPE-Testing-Prozedur</a></li>
   <li><a href="#bayes-faktoren" id="toc-bayes-faktoren" class="nav-link" data-scroll-target="#bayes-faktoren">Bayes Faktoren</a>
   <ul class="collapse">
   <li><a href="#beispielhafte-bayes-faktor-berechnung" id="toc-beispielhafte-bayes-faktor-berechnung" class="nav-link" data-scroll-target="#beispielhafte-bayes-faktor-berechnung">Beispielhafte Bayes-Faktor-Berechnung</a></li>
   <li><a href="#bayesfaktoren-mit-a-priori-verteilungshypothesen" id="toc-bayesfaktoren-mit-a-priori-verteilungshypothesen" class="nav-link" data-scroll-target="#bayesfaktoren-mit-a-priori-verteilungshypothesen">Bayesfaktoren mit a priori Verteilungshypothesen</a></li>
   </ul></li>
-  <li><a href="#frequentistische-parameterschätzung-konfidenzintervalle" id="toc-frequentistische-parameterschätzung-konfidenzintervalle" class="nav-link" data-scroll-target="#frequentistische-parameterschätzung-konfidenzintervalle">Frequentistische Parameterschätzung (Konfidenzintervalle)</a></li>
-  <li><a href="#bayesianische-parameterschätzung-credibility-intervalle" id="toc-bayesianische-parameterschätzung-credibility-intervalle" class="nav-link" data-scroll-target="#bayesianische-parameterschätzung-credibility-intervalle">Bayesianische Parameterschätzung (Credibility Intervalle)</a></li>
-  <li><a href="#die-rope-testing-prozedur" id="toc-die-rope-testing-prozedur" class="nav-link" data-scroll-target="#die-rope-testing-prozedur">Die ROPE-Testing-Prozedur</a></li>
   <li><a href="#literatur" id="toc-literatur" class="nav-link" data-scroll-target="#literatur">Literatur</a></li>
   </ul>
 <div class="quarto-other-links"><h2>Weitere Links</h2><ul><li><a href="https://data.nasa.gov/"><i class="bi bi-github"></i>GitHub Repository</a></li></ul></div><div class="quarto-code-links"><h2>Code-Links</h2><ul><li><a href="index.qmd"><i class="bi bi-file-code"></i>Link zum Code</a></li></ul></div></nav>
@@ -241,19 +245,19 @@ window.Quarto = {
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>Eva 💝 Julian</li>
-<li>Martin 💝 Christian</li>
-<li>Max 💝 Liene</li>
-<li>Nilani 💝 Sarah</li>
-<li>Kirstin 💝 Florian</li>
-<li>Kristina 💝 Cora</li>
+<li>Erika 💝 Theresa</li>
+<li>Julian 💝 Nilani</li>
+<li>Liene 💝 Kristina</li>
+<li>Eva 💝 Cora</li>
+<li>Marina 💝 Kirstin</li>
+<li>Florian 💝 Martin</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>Theresa 💝 Marina</li>
-<li>Michael 💝 Fabian</li>
-<li>Johanna 💝 Erika</li>
-<li>Carolin 💝 NA</li>
+<li>Sarah 💝 Carolin</li>
+<li>Max 💝 Christian</li>
+<li>Michael 💝 Johanna</li>
+<li>Fabian 💝 NA</li>
 <li>NA 💝 NA</li>
 <li>NA 💝 NA</li>
 </ul>
@@ -329,19 +333,19 @@ window.Quarto = {
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>Martin 💝 Nilani</li>
-<li>Erika 💝 Liene</li>
-<li>Johanna 💝 Cora</li>
-<li>Fabian 💝 Kirstin</li>
-<li>Carolin 💝 Sarah</li>
-<li>Eva 💝 Theresa</li>
+<li>Erika 💝 Christian</li>
+<li>Nilani 💝 Sarah</li>
+<li>Michael 💝 Kristina</li>
+<li>Johanna 💝 Eva</li>
+<li>Martin 💝 Cora</li>
+<li>Liene 💝 Carolin</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <ul>
-<li>Max 💝 Florian</li>
-<li>Christian 💝 Julian</li>
-<li>Marina 💝 Michael</li>
-<li>Kristina 💝 NA</li>
+<li>Marina 💝 Julian</li>
+<li>Max 💝 Theresa</li>
+<li>Florian 💝 Fabian</li>
+<li>Kirstin 💝 NA</li>
 <li>NA 💝 NA</li>
 <li>NA 💝 NA</li>
 </ul>
@@ -395,12 +399,181 @@ window.Quarto = {
 <ul>
 <li><p>The P value is the probability that the test hypothesis is true ❌</p></li>
 <li><p>The P value for the null hypothesis is the probability that chance alone produced the observed association ❌</p></li>
-<li><p>A significant test result (P ≤ 0.05) means that the test hypothesis is false ❌</p></li>
-<li><p>A nonsignificant test result (P &gt; 0.05) means that the test hypothesis is true or should be accepted ❌</p></li>
+<li><p>A significant test result (<span class="math inline">\(P \leq .05\)</span>) means that the test hypothesis is false ❌</p></li>
+<li><p>A nonsignificant test result (<span class="math inline">\(P &gt; .05\)</span>) means that the test hypothesis is true or should be accepted ❌</p></li>
 <li><p>A large P value is evidence in favor of the test hypothesis ❌</p></li>
 <li><p>Lack of statistical significance indicates that the effect size is small ❌</p></li>
 </ul>
+<div class="callout callout-style-default callout-customcallout no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Customcallout</span>🧠 Arbeitsauftrag:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>Welche p-Wert-Fehlkonzepte a) beobachtet ihr am häufigsten b) findet ihr am unverständlichsten?</strong></p>
+<p>Die Gruppen:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Sarah 💝 Carolin</li>
+<li>Johanna 💝 Theresa</li>
+<li>Eva 💝 Cora</li>
+<li>Nilani 💝 Michael</li>
+<li>Marina 💝 Fabian</li>
+<li>Julian 💝 Martin</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Kristina 💝 Kirstin</li>
+<li>Erika 💝 Liene</li>
+<li>Max 💝 Christian</li>
+<li>Florian 💝 NA</li>
+<li>NA 💝 NA</li>
+<li>NA 💝 NA</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
+</section>
+<section id="parameterschätzung" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="parameterschätzung">Parameterschätzung</h2>
+<section id="wahrscheinlichkeitsbegriffe" class="level3">
+<h3 class="anchored" data-anchor-id="wahrscheinlichkeitsbegriffe">Wahrscheinlichkeitsbegriffe</h3>
+<p>In der frequentistischen Statistik wird Wahrscheinlichkeit als der Grenzwert der relativen Häufigkeit eines Ereignisses in unendlich vielen Wiederholungen eines Zufallsexperiments konzeptualisiert. Demgegenüber wird in der bayesianischen Statistik Wahrscheinlichkeit als Maß für die Sicherheit des eintreten eines Ereignisses verstanden.</p>
+<table class="caption-top table">
+<caption>Wahrscheinlichkeitsbegriffe</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Frequentistisch</th>
+<th>Bayesianisch</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Eine faire Münze hat eine Wahrscheinlichkeit von 0.5 für »Kopf«, weil bei unendlich vielen Würfen der Anteil der »Kopf«-Würfe gegen 50% konvergiert.</td>
+<td>Eine faire Münze hat eine Wahrscheinlichkeit von 0.5 für »Kopf«, weil 0,5 die Mitte zwischen »vollkommen sicher Kopf« und »vollkommen sicher Zahl« ist.</td>
+</tr>
+<tr class="even">
+<td><img src="img/FWkeit.svg" class="img-fluid"></td>
+<td><img src="img/BWkeit.svg" class="img-fluid"></td>
+</tr>
+</tbody>
+</table>
+<p>Aus diesen unterschiedlichen Wahrscheinlichkeitsbegriffen ergeben sich in der frequentistischen und bayesianischen Statistik unterschiedliche Interpretationen von Unsicherheiten in der Parameterschätzung die oft als Konfidenzintervalle (frequentistisch) bzw. Credibility Intervalle (bayesianisch) operationalisiert werden.</p>
+</section>
+<section id="bayesianische-parameterschätzung-credibility-intervalle" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="bayesianische-parameterschätzung-credibility-intervalle">Bayesianische Parameterschätzung (Credibility Intervalle)</h3>
+<p>Credibilityintervalle werden dann aus dieser Posteriorverteilung abgeleitet. Um Parameter eines statistischen Modells (z.B. Intercept und Slope in einer Regressionsanalyse, Anteil <span class="math inline">\(\theta\)</span> an G9 Befürworter:innen) zu schätzen, wird im bayesianischen Paradigma die a priori Annahme über die Verteilung des Parameters (Prior) mit den vorliegenden Daten (Likelihood) kombiniert, um via des Satz von Bayes eine a posteriori Verteilung des Parameters (Posterior) zu erhalten. Aus dieser lässt sich dann sowohl die Punktschätzung (z.B. »Maximum a Postiori«), als auch dessen Unsicherheit (z.B. »Highest Density Intervals«) ableiten.</p>
+<div class="callout callout-style-default callout-customcallout no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Customcallout</span>💡 Satz von Bayes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\text{Posterior}=\frac{\text{Likelihood} \times \text{Prior}}{\text{Evidenz}}\]</span></p>
+<p><span class="math display">\[P(\theta \mid d)=\frac{p(d \mid \theta) \cdot P(\theta)}{P(d)}\]</span></p>
+</div>
+</div>
+<p>Credibilityintervalle um Parameterpunktschätzungen enthalten entlang der bayesianischen Wahrscheinlichkeitsdefinition Aussagen darüber, mit welcher Wahrscheinlichkeit der wahre Parameterwert in einem bestimmten Intervall liegt.</p>
+<div class="column-page-right">
+<iframe width="100%" height="875" src="app2.html" title="Quarto Documentation"></iframe>
+</div>
+<div class="callout callout-style-default callout-customcallout no-icon callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Customcallout</span>🧠 Arbeitsauftrag:
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Beobachtet in der App wie die Präzision des Priors (bei konstantem Mittelwert) den Posterior beinflusst.</li>
+<li>Beobachtet in der App wie recht stark vom Prior divergierende Daten den Posterior beinflussen wenn die Datenmenge sehr groß wird.</li>
+</ol>
+<p>Die Gruppen:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Michael 💝 Kirstin</li>
+<li>Nilani 💝 Cora</li>
+<li>Fabian 💝 Erika</li>
+<li>Kristina 💝 Carolin</li>
+<li>Liene 💝 Marina</li>
+<li>Sarah 💝 Max</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li>Florian 💝 Theresa</li>
+<li>Eva 💝 Christian</li>
+<li>Martin 💝 Julian</li>
+<li>Johanna 💝 NA</li>
+<li>NA 💝 NA</li>
+<li>NA 💝 NA</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="frequentistische-parameterschätzung-konfidenzintervalle" class="level3">
+<h3 class="anchored" data-anchor-id="frequentistische-parameterschätzung-konfidenzintervalle">Frequentistische Parameterschätzung (Konfidenzintervalle)</h3>
+<p>Konfidenzintervalle um Parameterpunktschätzungen enthalten entlang der frequentistischen Wahrscheinlichkeitsdefinition Aussagen darüber, welcher Anteil von Konfidenzintervallen (in the long run) den wahren Parameterwert enthält.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/CI2.gif" class="img-fluid figure-img"></p>
+<figcaption>Animation von https://rpsychologist.com/d3/ci/</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="die-rope-testing-prozedur" class="level2">
+<h2 class="anchored" data-anchor-id="die-rope-testing-prozedur">Die ROPE-Testing-Prozedur</h2>
+<p>Sowohl Credibilityintervalle als auch Konfidenzintervalle können genutzt werden, um Äquivalenzhypothesen zu testen. Hierzu wird ein sogenanntes ROPE (Region of Practical Equivalence) definiert, das den Bereich von Parameterwerten beschreibt, die als praktisch äquivalent zur Nullhypothese angesehen werden (z.B. Bevölkerung ist »quasi unentschieden so lange <span class="math inline">\(.47 &lt; \theta_{pro\,G9} &lt; .53\)</span>)«. Die Lage des Credibility- bzw. Konfidenzintervalls in Bezug auf das ROPE entscheidet dann über die Evidenz für oder gegen die Äquivalenznullhypothese:</p>
+<table class="caption-top table">
+<caption>ROPE-Testprozedur</caption>
+<thead>
+<tr class="header">
+<th>Lage</th>
+<th>Testentscheidung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>CI bzw. CrI vollständig innerhalb ROPE</td>
+<td><span class="math inline">\(H_0\)</span> annehmen</td>
+</tr>
+<tr class="even">
+<td>CI bzw. CrI vollständig außerhalb ROPE</td>
+<td><span class="math inline">\(H_1\)</span> annehmen</td>
+</tr>
+<tr class="odd">
+<td>sonst</td>
+<td>inkonklusiv</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="bayes-faktoren" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="bayes-faktoren">Bayes Faktoren</h2>
@@ -454,19 +627,6 @@ window.Quarto = {
 <iframe width="100%" height="900" src="app3.html" title="Bayes factor App 1"></iframe>
 </div>
 </section>
-</section>
-<section id="frequentistische-parameterschätzung-konfidenzintervalle" class="level2">
-<h2 class="anchored" data-anchor-id="frequentistische-parameterschätzung-konfidenzintervalle">Frequentistische Parameterschätzung (Konfidenzintervalle)</h2>
-<p>Ein sehr hilfreiche Visualisierung um das Konzept von Konfidenzintervallen zu verstehen, ist die folgende (interaktive App)[https://rpsychologist.com/d3/ci/]</p>
-</section>
-<section id="bayesianische-parameterschätzung-credibility-intervalle" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="bayesianische-parameterschätzung-credibility-intervalle">Bayesianische Parameterschätzung (Credibility Intervalle)</h2>
-<div class="column-page-right">
-<iframe width="100%" height="1100" src="app2.html" title="Quarto Documentation"></iframe>
-</div>
-</section>
-<section id="die-rope-testing-prozedur" class="level2">
-<h2 class="anchored" data-anchor-id="die-rope-testing-prozedur">Die ROPE-Testing-Prozedur</h2>
 </section>
 <section id="literatur" class="level2 unnumbered">
 
