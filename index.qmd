@@ -3,6 +3,7 @@ title: "Testing and Estimation"
 subtitle: "for Bayesians, frequentists and agnostics"
 format: 
   html: 
+    html-math-method: katex
     title-block-banner: "#267326"
     toc: true
     toc-location: left
@@ -87,7 +88,7 @@ Ganz grundlegend kann a priori das Erkenntnisinteresse von Studien in die folgen
 #| echo: false
 ifeb_names <- c("André", "Carolin", "Christian", "Erika", "Eva", "Fabian", "Florian", "Johanna", "Kirstin", "Kristina", "Liene", "Marina", "Max", "Michael", "Nilani", "Sarah", "Theresa", "Cora", "Martin")
 not_present <- c("André")
-additions <- c("Julian")
+additions <- character(0)
 present <- c(ifeb_names[!ifeb_names %in% not_present], additions)
 groups_long <- sample(present, length(present))
 ```
@@ -193,7 +194,7 @@ In den Sozialwissenschaften sind *p*-Werte das wohl verbreitetste inferenzstatis
 
 Konzeptuell können *p*-Werte als die bedingte Wahrscheinlichkeit definiert werden, mit der unter der Annahme der Gültigkeit der Nullhypothese die vorliegen Daten oder noch extremer gegen die Nullhypothese sprechende Daten beobachtet werden.
 
-$$\text{p-Wert}= P\left(\text{vorl. o. extremer gegen }H_0\text{ sprechende Daten} | H_0 \text{ ist wahr}\right)$$
+$$\text{p-Wert}= P\left(\text{vorl. o. extremer für }H_A\text{ sprechende Daten} | H_0 \text{ ist wahr}\right)$$
 :::
 
 ### Beispielhafte *p*-Wert Berechnung
@@ -201,7 +202,7 @@ $$\text{p-Wert}= P\left(\text{vorl. o. extremer gegen }H_0\text{ sprechende Date
 Angenommen wir haben die folgenden Hypothesen & Daten:
 
 -   Hypothesen
-    -   Nullhypothese: <br> *Der Anteil der Befürworter\*innen von G9 (vs G8)≤ 50%.*
+    -   Nullhypothese: <br> *Der Anteil der Befürworter\*innen von G9 (vs G8) = 50%.*
     -   Alternativhypothese: <br> *Mehr als 50% der Eltern befürworten G9 (vs G8).*
 -   Daten:
     -   3 »für G9«
