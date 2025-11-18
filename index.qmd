@@ -73,7 +73,7 @@ typography:
 
 ## Erkenntnisinteressen
 
-Ganz grundlegend kann a priori das Erkenntnisinteresse von Studien in die folgenden vier Kategorien unterschieden werden:
+Ganz grundlegend kann das Erkenntnisinteresse von Studien in die folgenden vier Kategorien unterschieden werden:
 
 ::: column-page-right
 | Deskriptiv | Explorativ | Explanativ | Prädiktiv |
