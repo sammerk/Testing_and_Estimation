@@ -19,7 +19,7 @@ format:
 author: 
   - name: Samuel Merk
     orcid: 0000-0003-2594-5337
-abstract: "Ausgehend von der grundlegenden Unterscheidung deskriptiver, explanativer und explorativer Forschungsfragen, wollen wir einen Blick auch die Gemeinsamkeiten und Unterschiede Bayesesianischer und frequentischer Schätz- und Testmethoden werfen" 
+abstract: "Ausgehend von der grundlegenden Unterscheidung deskriptiver, explanativer und explorativer Forschungsfragen, wollen wir einen Blick auf die Gemeinsamkeiten und Unterschiede Bayesianischer und frequentischer Schätz- und Testmethoden werfen." 
 date: today
 lang: de
 csl: apa.csl
@@ -403,5 +403,16 @@ $$
 ```
 :::
 
-
+<style>
+.quarto-title-block .quarto-title-banner {
+  background-image: url(img/ifeblogoweiss.svg);
+  background-size: 150px;
+  background-position: left;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-origin: content-box;
+}
+</style>
 ## Literatur
